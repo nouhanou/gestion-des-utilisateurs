@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="734.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UsersController">
+    <stylesheets>
+        <URL value="@users.css" />
+    </stylesheets>
+   <children>
+      <TabPane layoutX="-8.0" layoutY="38.0" prefHeight="521.0" prefWidth="742.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Users Data">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="739.0">
+                     <children>
+                        <HBox layoutX="214.0" layoutY="-1.0" prefHeight="529.0" prefWidth="528.0">
+                           <children>
+                              <TableView fx:id="usertable" prefHeight="444.0" prefWidth="498.0">
+                                <columns>
+                                  <TableColumn fx:id="dataid" prefWidth="37.0" text="id" />
+                                  <TableColumn fx:id="datausername" prefWidth="89.0" text="username" />
+                                    <TableColumn fx:id="dataemail" prefWidth="82.0" text="email" />
+                                    <TableColumn fx:id="datapassword" prefWidth="68.0" text="password" />
+                                    <TableColumn fx:id="dataenabled" prefWidth="42.0" text="enabled" />
+                                    <TableColumn fx:id="datalogin" prefWidth="67.0" text="last_login" />
+                                    <TableColumn fx:id="datarole" prefWidth="61.0" text="role" />
+                                    <TableColumn fx:id="colEdit" prefWidth="81.0" text="Column X" />
+                                </columns>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </TableView>
+                           </children>
+                        </HBox>
+                        <VBox layoutY="-3.0" prefHeight="533.0" prefWidth="213.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="222.0" text="Users Data" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold Italic" size="24.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="stsusername" promptText="Username">
+                                 <opaqueInsets>
+                                    <Insets left="10.0" top="10.0" />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="stsemail" promptText="Email">
+                                 <opaqueInsets>
+                                    <Insets left="10.0" top="10.0" />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="stspassword" promptText="Password">
+                                 <opaqueInsets>
+                                    <Insets left="10.0" top="10.0" />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Button mnemonicParsing="false" onAction="#AddData" text="add User">
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" left="70.0" top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" text="delete User">
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" left="70.0" top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button fx:id="load" mnemonicParsing="false" onAction="#LoadUserData" text="load data">
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" left="70.0" top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Label />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <AnchorPane prefHeight="68.0" prefWidth="742.0" style="-fx-background-color: #7e7e7e;">
+         <children>
+            <ImageView layoutX="93.0" layoutY="18.0">
+               <image>
+                  <Image url="@../GUI/Search%20Property_32px.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="filterField" layoutX="162.0" layoutY="22.0" prefHeight="25.0" prefWidth="308.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

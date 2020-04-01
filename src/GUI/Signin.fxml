@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SigninController">
+   <children>
+      <StackPane>
+         <children>
+            <AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="940.0" stylesheets="@style.css">
+               <styleClass>
+                  <String fx:value="login-bg" />
+                  <String fx:value="login-bg" />
+               </styleClass>
+               <children>
+                  <AnchorPane layoutX="485.0" layoutY="114.0" prefHeight="433.0" prefWidth="388.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10px;">
+                     <effect>
+                        <DropShadow color="#20beb4" height="35.59" radius="13.6475" />
+                     </effect>
+                  </AnchorPane>
+                  <ImageView fitHeight="268.0" fitWidth="206.0" layoutX="135.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../GUI/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </AnchorPane>
+            <AnchorPane id="AnchorPane" fx:id="pwdErr" layoutX="10.0" layoutY="10.0" prefHeight="644.0" prefWidth="940.0" stylesheets="@style.css">
+               <styleClass>
+                  <String fx:value="login-bg" />
+                  <String fx:value="login-bg" />
+               </styleClass>
+               <children>
+                  <JFXButton fx:id="cnx" layoutX="194.0" layoutY="400.0" onAction="#Cnx_action" styleClass="btn-register" text="Se connecter" textFill="YELLOW">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXTextField fx:id="username_field" layoutX="539.0" layoutY="245.0" promptText="Username" />
+                  <JFXTextField fx:id="email_field" layoutX="539.0" layoutY="297.0" promptText="Email" />
+                  <JFXPasswordField fx:id="password_field" layoutX="541.0" layoutY="352.0" promptText="Password" />
+                  <JFXPasswordField fx:id="repeatpassword_field" layoutX="541.0" layoutY="400.0" promptText="Confirm Passsword" />
+                  <JFXButton fx:id="signin" buttonType="RAISED" contentDisplay="CENTER" layoutX="608.0" layoutY="469.0" onAction="#Inscrir_action" text="S'inscrire" textFill="GREY">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="581.0" layoutY="136.0" text="S'inscricre à kidzy" textFill="YELLOW">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="ExistErr" layoutX="549.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur existe deja*" visible="false" wrappingWidth="227.13671875" />
+                  <Text fx:id="videErr" layoutX="558.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Champs vides*" visible="false" wrappingWidth="156.13671875" />
+                  <Text fx:id="VerifPwdErr" layoutX="564.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vérifier votre mot de passe**" visible="false" wrappingWidth="156.1367187499999" />
+                  <Text fx:id="pwdErr" layoutX="607.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le nombre de caractéres de mot de passe doit étre entre 4 et 15, et comporter des lettres et des chiffres(des minuscules ET des majuscules)." visible="false" wrappingWidth="265.1367187499999" />
+                  <Text fx:id="msgerreur" layoutX="740.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid credentials" visible="false" wrappingWidth="127.0" />
+                  <Text fx:id="emailErr" layoutX="740.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="verifier votre email" visible="false" />
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+</StackPane>
