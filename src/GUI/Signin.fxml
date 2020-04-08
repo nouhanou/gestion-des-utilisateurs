@@ -44,16 +44,16 @@
                   <String fx:value="login-bg" />
                </styleClass>
                <children>
-                  <JFXButton fx:id="cnx" layoutX="194.0" layoutY="400.0" onAction="#Cnx_action" styleClass="btn-register" text="Se connecter" textFill="YELLOW">
+                  <JFXButton fx:id="cnx" layoutX="172.0" layoutY="401.0" onAction="#Cnx_action" style="-fx-background-color: #87CEEB;" styleClass="btn-register" text="Se connecter" textFill="YELLOW">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="17.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField fx:id="username_field" layoutX="539.0" layoutY="245.0" promptText="Username" />
-                  <JFXTextField fx:id="email_field" layoutX="539.0" layoutY="297.0" promptText="Email" />
-                  <JFXPasswordField fx:id="password_field" layoutX="541.0" layoutY="352.0" promptText="Password" />
-                  <JFXPasswordField fx:id="repeatpassword_field" layoutX="541.0" layoutY="400.0" promptText="Confirm Passsword" />
-                  <JFXButton fx:id="signin" buttonType="RAISED" contentDisplay="CENTER" layoutX="608.0" layoutY="469.0" onAction="#Inscrir_action" text="S'inscrire" textFill="GREY">
+                  <JFXTextField fx:id="username_field" layoutX="528.0" layoutY="233.0" promptText="Username" />
+                  <JFXTextField fx:id="email_field" layoutX="528.0" layoutY="285.0" promptText="Email" />
+                  <JFXPasswordField fx:id="password_field" layoutX="528.0" layoutY="348.0" promptText="Password" />
+                  <JFXPasswordField fx:id="repeatpassword_field" layoutX="528.0" layoutY="407.0" promptText="Confirm Passsword" />
+                  <JFXButton fx:id="signin" contentDisplay="CENTER" layoutX="609.0" layoutY="449.0" onAction="#Inscrir_action" text="S'inscrire" textFill="GREY" textOverrun="WORD_ELLIPSIS">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -67,11 +67,21 @@
                   <Text fx:id="videErr" layoutX="558.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Champs vides*" visible="false" wrappingWidth="156.13671875" />
                   <Text fx:id="VerifPwdErr" layoutX="564.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vérifier votre mot de passe**" visible="false" wrappingWidth="156.1367187499999" />
                   <Text fx:id="pwdErr" layoutX="607.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le nombre de caractéres de mot de passe doit étre entre 4 et 15, et comporter des lettres et des chiffres(des minuscules ET des majuscules)." visible="false" wrappingWidth="265.1367187499999" />
-                  <Text fx:id="msgerreur" layoutX="740.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid credentials" visible="false" wrappingWidth="127.0" />
-                  <Text fx:id="emailErr" layoutX="740.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="verifier votre email" visible="false" />
+                  <Text fx:id="msgerreur" layoutX="740.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username doit contenir au minimum 3 caracteres et maximum 15" visible="false" wrappingWidth="127.0" />
+                  <Text fx:id="emailErr" layoutX="740.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="verifier votre email" visible="false" wrappingWidth="114.607421875" />
+                  <JFXButton layoutX="538.0" layoutY="493.0" onAction="#authUser" prefHeight="38.0" prefWidth="249.0" style="-fx-background-color: #3b5997;" text="S'inscrire avec Facebook" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView layoutX="542.0" layoutY="496.0">
+                     <image>
+                        <Image url="@Facebook_32px.png" />
+                     </image>
+                  </ImageView>
                </children>
                <effect>
-                  <DropShadow />
+                  <DropShadow height="0.0" radius="0.0" width="0.0" />
                </effect>
             </AnchorPane>
          </children>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.updateUserController">
+   <children>
+      <AnchorPane prefHeight="500.0" prefWidth="251.0" style="-fx-background-color: #C0C0C0;">
+         <children>
+            <JFXButton fx:id="btn_all" buttonType="RAISED" layoutY="244.0" onAction="#All_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #d22324ba;" text="all users" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Separator layoutX="20.0" layoutY="213.0" prefWidth="200.0" style="-fx-background-color: #fff;" />
+            <ImageView fitHeight="172.0" fitWidth="168.0" layoutX="36.0" layoutY="15.0">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="deleteUser" buttonType="RAISED" layoutY="315.0" onAction="#deleteUser_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #8FBC8F;" text="delete user" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="addUser" buttonType="RAISED" layoutY="388.0" onAction="#addUser_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #d22324ba;" text="add user" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="46.0" fitWidth="32.0" layoutX="43.0" layoutY="319.0">
+               <image>
+                  <Image url="@../icons/Delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="53.0" fitWidth="58.0" layoutX="34.0" layoutY="241.0">
+               <image>
+                  <Image url="@../icons/avatar.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="39.0" layoutY="387.0">
+               <image>
+                  <Image url="@../icons/check.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Text layoutX="284.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Text>
+      <Label layoutX="367.0" layoutY="41.0" text="user data">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="339.0" layoutY="175.0" text="Username :" />
+      <Label layoutX="339.0" layoutY="233.0" prefHeight="17.0" prefWidth="68.0" text="Email:" />
+      <Label layoutX="339.0" layoutY="286.0" prefHeight="17.0" prefWidth="48.0" text="Enabled :" />
+      <Label layoutX="339.0" layoutY="349.0" text="Role :" />
+      <JFXTextField fx:id="username" layoutX="469.0" layoutY="163.0" />
+      <JFXTextField fx:id="email" layoutX="462.0" layoutY="221.0" />
+      <JFXTextField fx:id="enabled" layoutX="462.0" layoutY="274.0" />
+      <JFXTextField fx:id="role" layoutX="462.0" layoutY="337.0" />
+      <JFXButton fx:id="update" layoutX="552.0" layoutY="416.0" onAction="#BtnUpdate_action" prefHeight="25.0" prefWidth="93.0" text="Update" />
+   </children>
+</AnchorPane>

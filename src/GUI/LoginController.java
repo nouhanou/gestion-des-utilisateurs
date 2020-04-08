@@ -24,6 +24,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,19 +35,16 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.openqa.selenium.WebDriver;
 import javafx.scene.layout.StackPane;
-
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-
 
 /**
  *
  * @author HP
  */
 public class LoginController implements Initializable {
-    
+
     UserService UService;
     private Label label;
     @FXML
@@ -55,19 +54,19 @@ public class LoginController implements Initializable {
     @FXML
     private JFXButton cnx;
     @FXML
+    private JFXButton auth;
+    @FXML
     private JFXTextField username_field;
     @FXML
     private JFXPasswordField password_field;
     @FXML
     private JFXButton signin;
-    
-   
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }  
-    
+    }
+
     @FXML
     private void seConnecter_action(ActionEvent event) throws SQLException, IOException {
         Boolean error = false;
@@ -83,20 +82,19 @@ public class LoginController implements Initializable {
         }
 
         if (!error) {
-            int x=0;
+            int x = 0;
             UService = new UserService();
             if (UService.login(username_field.getText(), password_field.getText())) {
-                Parent root = FXMLLoader.load(getClass().getResource("Users.fxml"));
-               
+                Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
+
                 cnx.getScene().setRoot(root);
-   
-                
-            }
+
             } else {
                 msgerreur.setVisible(true);
             }
         }
-    
+    }
+
     @FXML
     private void Inscrir_action(ActionEvent event) throws IOException {
 
@@ -107,8 +105,44 @@ public class LoginController implements Initializable {
     private void Close_action(MouseEvent event) {
         System.exit(0);
     }
+
+    @FXML
+    private void authUser(ActionEvent event) throws IOException, SQLException {
+        String domaine = "https://kawami.io";
+        String appId = "353823941796971";
+
+        String autUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domaine + "&scope=email,public_profile";
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+      
+        driver.get(autUrl);
+        String accessToken;
+        while (true) {
+
+            if (!driver.getCurrentUrl().contains("facebook.com")) {
+                String url = driver.getCurrentUrl();
+                accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
+
+                driver.quit();
+                driver.quit();
+                driver.quit();
+                driver.quit();
+
+                FacebookClient fbClient = new DefaultFacebookClient(accessToken);
+                com.restfb.types.User user = fbClient.fetchObject("me", com.restfb.types.User.class);
+
+                if (user.getId().length() != 0) {
+                    UService = new UserService();
+                    if (UService.loginByfb(user.getName(), user.getId())) {
+                        Parent root = FXMLLoader.load(getClass().getResource("Users.fxml"));
+                        cnx.getScene().setRoot(root);
+                    } else {
+                        msgerreur.setVisible(true);
+                    }
+                }
+            }
+
+        }
+
+    }
 }
-
-    
-    
-

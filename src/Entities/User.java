@@ -16,14 +16,14 @@ public class User {
     String username;
     String email;
     String password;
-    Boolean enabled;
+    int enabled;
     Date last_login;
     String role;
     public User(){
     
     
 }
-    public User(int id, String username, String email, String password, Boolean enabled, Date last_login, String role) {
+    public User(int id, String username, String email, String password, int enabled, Date last_login, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -33,7 +33,7 @@ public class User {
         this.role = role;
     }
     
-    public User(int id, String username, String email, String password, Boolean enabled, String role) {
+    public User(int id, String username, String email, String password, int enabled, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -42,7 +42,7 @@ public class User {
         this.role = role;
     }
     
-    public User(int id, String username, String email, Boolean enabled, String role) {
+    public User(int id, String username, String email, int enabled, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -61,7 +61,7 @@ public class User {
         this.id = id;
     }
     
-    public User(String username, String email, Boolean enabled, String role) {
+    public User(String username, String email, int enabled, String role) {
         this.username = username;
         this.email = email;
         this.enabled = enabled;
@@ -100,11 +100,11 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getEnabled() {
+    public int getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
+    public void setEnabled(int enabled) {
         this.enabled = enabled;
     }
 
