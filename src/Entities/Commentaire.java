@@ -12,22 +12,33 @@ package Entities;
 public class Commentaire {
 
     private int id;
-    private int id_user;
     private String text;
-    //private int id_event;
+    private int id_user;
+    private int id_enfant;
 
-    public Commentaire(int id, String text, int id_user) {
+    public Commentaire(int id, String text, int id_user, int id_enfant) {
         this.id = id;
         this.text = text;
         this.id_user = id_user;
-        //this.id_event = id_event;
-        
+        this.id_enfant = id_enfant;
     }
+
+    
 
     @Override
     public String toString() {
-        return "Commentaire{" + "id=" + id + ", id_user=" + id_user + ", text=" + text + '}';
+        return this.text ;
     }
+
+    public int getId_enfant() {
+        return id_enfant;
+    }
+
+    public void setId_enfant(int id_enfant) {
+        this.id_enfant = id_enfant;
+    }
+
+    
 
     
 

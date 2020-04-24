@@ -15,10 +15,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+//import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -93,9 +102,10 @@ public class UserService {
         }
         return false;
     }
+  
 
     public Boolean login(String userName, String Pwd) throws SQLException {
-        String req = "SELECT * FROM fos_user WHERE username=? and password= ?";
+        String req = "SELECT * FROM fos_user WHERE username=? and password= ? and  enabled=1";
         PreparedStatement pre = cnx.prepareStatement(req);
         pre.setString(1, userName);
         pre.setString(2, Pwd);
@@ -109,6 +119,8 @@ public class UserService {
             Session.setUsername(rs.getString("username"));
             Session.setEmail(rs.getString("email"));
             Session.setRole(rs.getString("roles"));
+            Session.setPassword(rs.getString("password"));
+
 
             return true;
 
@@ -130,6 +142,7 @@ public class UserService {
             Session.setUsername(rs.getString("username"));
             Session.setEmail(rs.getString("email"));
             Session.setRole(rs.getString("roles"));
+
             return true;
 
         }
@@ -237,11 +250,11 @@ public class UserService {
         String req = "UPDATE `fos_user` SET username = ? , email = ? , enabled = ? , role = ? WHERE id = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(2, u.getUsername());
-            ps.setString(4, u.getEmail());
-            ps.setInt(6, u.getEnabled());
-            ps.setString(12, u.getRole());
-            //ps.setInt(1, u.getId());
+            ps.setString(1, u.getUsername());
+            ps.setString(2, u.getEmail());
+            ps.setInt(3, u.getEnabled());
+            ps.setString(4, u.getRole());
+            ps.setInt(5, u.getId());
 // execute insert SQL statement
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -268,6 +281,39 @@ public class UserService {
         }
         return Ads;
     }
+    
+       public boolean updatePassword(String mdp,int id) throws SQLException {
+            PreparedStatement pre = cnx.prepareStatement("update fos_user set password='" + mdp + "' where id='" +id+"'");
+        return pre.executeUpdate() == 1;
+
+    }
+       
+        public boolean banir(int id) throws SQLException {
+         PreparedStatement pre = cnx.prepareStatement("update fos_user set enabled=0 where id='" +id+"' and roles='a:0:{}'");
+        return pre.executeUpdate() == 1;        
+    }
+        public String selectRole(int id) {
+        String req = "SELECT roles FROM `fos_user` WHERE id=" + id;
+        PreparedStatement preparedStatement;
+        //return String role;
+        String lsAdresse = "";
+      try
+      {
+         Statement state = cnx.createStatement();
+         ResultSet result = state.executeQuery(req);
+         result.next();
+         lsAdresse = result.getString(1);
+         result.close();
+         state.close();
+      }
+      catch(Exception e){ lsAdresse = "Introuvable"; }
+      return lsAdresse;
+       
+        
+    }
+        
+    
+    
 
     
 }

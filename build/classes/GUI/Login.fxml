@@ -43,12 +43,12 @@
                   <String fx:value="login-bg" />
                </styleClass>
                <children>
-                  <AnchorPane layoutX="484.0" layoutY="106.0" prefHeight="433.0" prefWidth="388.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10px;">
+                  <AnchorPane layoutX="484.0" layoutY="96.0" prefHeight="475.0" prefWidth="388.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10px;">
                      <effect>
                         <DropShadow color="#20beb4" height="35.59" radius="13.6475" />
                      </effect>
                      <children>
-                        <JFXButton fx:id="cnx" layoutX="130.0" layoutY="256.0" onAction="#seConnecter_action" prefHeight="56.0" prefWidth="112.0" styleClass="btn-login" text="Login" textFill="#72726d">
+                        <JFXButton fx:id="cnx" layoutX="120.0" layoutY="251.0" onAction="#seConnecter_action" prefHeight="56.0" prefWidth="112.0" styleClass="btn-login" text="Login" textFill="#72726d">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -73,7 +73,7 @@
                               <Font name="System Bold Italic" size="15.0" />
                            </font>
                         </JFXPasswordField>
-                        <JFXButton fx:id="auth" buttonType="RAISED" layoutX="54.0" layoutY="336.0" onAction="#authUser" prefHeight="45.0" prefWidth="248.0" style="-fx-background-color: #3b5997; -fx-cursor: 'hand';" styleClass="-fx-cursor" text="    Se connecter avec Facebook" textAlignment="CENTER" textFill="WHITE">
+                        <JFXButton fx:id="auth" buttonType="RAISED" layoutX="43.0" layoutY="321.0" onAction="#authUser" prefHeight="45.0" prefWidth="248.0" style="-fx-background-color: #3b5997; -fx-cursor: 'hand';" styleClass="-fx-cursor" text="    Se connecter avec Facebook" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="SansSerif Bold" size="13.0" />
                            </font>
@@ -83,11 +83,17 @@
                               <Image url="@../GUI/Facebook_32px.png" />
                            </image>
                         </ImageView>
+                        <ImageView layoutX="45.0" layoutY="327.0">
+                           <image>
+                              <Image url="@../icons/Facebook_32px.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton fx:id="mdp" layoutX="133.0" layoutY="405.0" onAction="#mdp" text="Mot de passe oublié?" />
                      </children>
                   </AnchorPane>
                   <ImageView fitHeight="268.0" fitWidth="206.0" layoutX="135.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../GUI/logo.png" />
+                        <Image url="@../icons/logo.png" />
                      </image>
                   </ImageView>
                   <JFXButton fx:id="signin" layoutX="194.0" layoutY="400.0" onAction="#Inscrir_action" styleClass="btn-register" text="Register" textFill="YELLOW">

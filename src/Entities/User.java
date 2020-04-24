@@ -19,6 +19,10 @@ public class User {
     int enabled;
     Date last_login;
     String role;
+    public static int code;
+    public static User user=null;
+
+
     public User(){
     
     
@@ -129,5 +133,3 @@ public class User {
         return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", enabled=" + enabled + ", last_login=" + last_login + ", role=" + role + '}';
     }
 }
-
-    

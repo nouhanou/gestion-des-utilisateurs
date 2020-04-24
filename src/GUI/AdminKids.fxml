@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="644.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminKidsController">
+   <children>
+      <TableView fx:id="ListEnfant" layoutX="32.0" layoutY="46.0" prefHeight="298.0" prefWidth="868.0">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="67.0" text="id" />
+            <TableColumn fx:id="name" minWidth="8.333328247070312" prefWidth="123.0" text="Nom et prenom" />
+            <TableColumn fx:id="dt" minWidth="0.0" prefWidth="145.0" text="date de naissance" />
+            <TableColumn fx:id="place" prefWidth="124.0" text="lieux de naissance" />
+            <TableColumn fx:id="grd" prefWidth="99.0" text="garderie" />
+            <TableColumn fx:id="classe" prefWidth="93.0" text="classe" />
+            <TableColumn fx:id="info" prefWidth="151.0" text="autres informations" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="details" layoutX="626.0" layoutY="540.0" onAction="#details_action" prefHeight="56.0" prefWidth="162.0" style="-fx-background-color: #FA8072;" text="Consulter le profil" />
+      <JFXButton fx:id="delete" layoutX="266.0" layoutY="540.0" onAction="#delete_Action" prefHeight="56.0" prefWidth="133.0" style="-fx-background-color: #FA8072;" text="déinscricre" />
+      <JFXButton fx:id="back" layoutX="62.0" layoutY="562.0" onAction="#back" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: #808080;" text="back" />
+   </children>
+</AnchorPane>

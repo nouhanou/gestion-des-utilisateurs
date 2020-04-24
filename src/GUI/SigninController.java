@@ -26,6 +26,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -47,6 +50,8 @@ public class SigninController implements Initializable {
     private JFXPasswordField repeatpassword_field;
     @FXML
     private JFXButton cnx;
+    @FXML
+    private Button plus;
 
     private Text existErr;
 
@@ -59,6 +64,12 @@ public class SigninController implements Initializable {
     private Text msgerreur;
 
     private Text emailErr;
+    @FXML
+    private VBox pane_main_grid;
+    @FXML
+    private JFXTextField cin_field;
+    @FXML
+    private JFXTextField child_field;
 
     /**
      * Initializes the controller class.
@@ -70,52 +81,92 @@ public class SigninController implements Initializable {
 
     @FXML
     private void Inscrir_action(ActionEvent event) throws IOException, SQLException {
-        /**Boolean error = false;
-        if (email_field.getText().equals("") || username_field.getText().equals("") || password_field.getText().equals("") || repeatpassword_field.getText().equals("")) {
-            videErr.setVisible(true);
+
+        Boolean error = false;
+        if (email_field.getText().equals("")
+                || username_field.getText().equals("")
+                || password_field.getText().equals("")
+                || repeatpassword_field.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Look, an Error Dialog");
+            alert.setContentText("Champs vides");
+
+            alert.showAndWait();
             error = true;
         } else {
-            videErr.setVisible(false);
 
             if (!validate(email_field.getText())) {
-                emailErr.setVisible(true);
-                error = true;
-            } else {
-                emailErr.setVisible(false);
-            }
-            if (username_field.getLength() < 3 || username_field.getLength() > 15) {
-                msgerreur.setVisible(true);
-                error = true;
-            } else {
-                msgerreur.setVisible(false);
-            }
-            if (!PasswordStrong(password_field.getText())) {
-                pwdErr.setVisible(true);
-                error = true;
-            } else {
-                pwdErr.setVisible(false);
-            }
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("Ooops, Vérifier votre mail!");
 
-            if (repeatpassword_field.getText().equals(password_field.getText())) {
-                VerifPwdErr.setVisible(false);
+                alert.showAndWait();
+                error = true;
+            }  
+            else if (username_field.getLength() < 3 || username_field.getLength() > 10) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("Ooops, username doit contenir au minimum 3 caractères et maximum 10!");
+
+                alert.showAndWait();
+                error = true;
+            } 
+
+            else if (!PasswordStrong(password_field.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("Ooops, Le nombre de caractéres de mot de passe doit étre entre 4 et 15, et comporter des lettres et des chiffres(des minuscules ET des majuscules)!");
+
+                alert.showAndWait();
+
+                error = true;
+            } 
+
+            else if (cin_field.getLength() != 8) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("please enter 8 digits");
+
+                alert.showAndWait();
+                error = true;
+            } 
+
+            else if (repeatpassword_field.getText().equals(password_field.getText())) {
+                error = false;
 
             } else {
-                VerifPwdErr.setVisible(true);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("Vérifier votre mot de passe!");
+
+                alert.showAndWait();
                 error = true;
             }
         }
 
         if (!error) {
-            **/UService = new UserService();
+
+            UService = new UserService();
             if (UService.Signin(username_field.getText(), email_field.getText(), password_field.getText())) {
                 Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
                 signin.getScene().setRoot(root);// 
             } else {
-                existErr.setVisible(true);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("utilisateur existe deja!");
+
+                alert.showAndWait();
             }
         }
 
-   // }
+    }
 
     @FXML
     private void Cnx_action(ActionEvent event) throws IOException {
@@ -135,7 +186,7 @@ public class SigninController implements Initializable {
     }
 
     public static boolean PasswordStrong(String pass) {
-        String expresion = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        String expresion = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])";
         Pattern patron = Pattern.compile(expresion);
         Matcher m = patron.matcher(pass);
         return m.find();
@@ -178,5 +229,12 @@ public class SigninController implements Initializable {
 
         }
     }
+
+    @FXML
+    private void AddTextField(ActionEvent event) {
+        JFXTextField newField = new JFXTextField();
+        pane_main_grid.getChildren().add(newField);
+    }
+
 
 }

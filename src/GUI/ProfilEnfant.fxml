@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="644.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProfilEnfantController">
+   <children>
+      <Label layoutX="47.0" layoutY="108.0" prefHeight="17.0" prefWidth="96.0" text="Date de naissance:" />
+      <Label layoutX="52.0" layoutY="153.0" text="Lieux de naissance" />
+      <Label layoutX="62.0" layoutY="199.0" prefHeight="17.0" prefWidth="105.0" text="Garderie:" />
+      <Label layoutX="67.0" layoutY="244.0" prefHeight="17.0" prefWidth="127.0" text="Classe:" />
+      <Label layoutX="489.0" layoutY="128.0" text="Autres info:" />
+      <Label fx:id="ldate" layoutX="212.0" layoutY="105.0" prefHeight="17.0" prefWidth="108.0" />
+      <Label fx:id="lplace" layoutX="218.0" layoutY="154.0" prefHeight="17.0" prefWidth="115.0" />
+      <Label fx:id="lgarderie" layoutX="197.0" layoutY="198.0" prefHeight="17.0" prefWidth="124.0" />
+      <Label fx:id="lclasse" layoutX="192.0" layoutY="243.0" prefHeight="17.0" prefWidth="159.0" />
+      <Label fx:id="linfo" layoutX="616.0" layoutY="129.0" prefHeight="17.0" prefWidth="203.0" />
+      <Label fx:id="lname" layoutX="312.0" layoutY="36.0" prefHeight="17.0" prefWidth="185.0" />
+      <JFXListView fx:id="comments" layoutX="32.0" layoutY="358.0" prefHeight="133.0" prefWidth="746.0" />
+      <JFXTextArea fx:id="tText" layoutX="86.0" layoutY="527.0" prefHeight="35.0" prefWidth="464.0" />
+      <JFXButton fx:id="send" layoutX="624.0" layoutY="548.0" onAction="#send" text="ajouter" />
+      <JFXButton fx:id="back" layoutX="105.0" layoutY="590.0" onAction="#back" text="back" />
+   </children>
+</AnchorPane>

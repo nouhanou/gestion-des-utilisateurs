@@ -15,6 +15,16 @@ public class Session {
     private static String username;
     private static String email;
     private static String role;
+    private static String password;
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        Session.password = password;
+    }
+    
     private static int id_Lo;
 
     public static int getId() {

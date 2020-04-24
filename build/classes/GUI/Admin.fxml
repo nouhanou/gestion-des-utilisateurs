@@ -14,11 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminController">
+<AnchorPane id="AnchorPane" fx:id="child" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminController">
    <children>
-      <AnchorPane prefHeight="500.0" prefWidth="251.0" style="-fx-background-color: #C0C0C0;">
+      <AnchorPane prefHeight="700.0" prefWidth="251.0" style="-fx-background-color: #C0C0C0;">
          <children>
-            <JFXButton fx:id="btn_all" buttonType="RAISED" layoutY="244.0" onAction="#All_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #d22324ba;" text="all users" textFill="WHITE">
+            <JFXButton fx:id="btn_all" buttonType="RAISED" layoutY="244.0" onAction="#All_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #FA8072;" text="all users" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -29,10 +29,10 @@
             <Separator layoutX="20.0" layoutY="213.0" prefWidth="200.0" style="-fx-background-color: #fff;" />
             <ImageView fitHeight="172.0" fitWidth="168.0" layoutX="36.0" layoutY="15.0">
                <image>
-                  <Image url="@logo.png" />
+                  <Image url="@../icons/logo.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="deleteUser" buttonType="RAISED" layoutY="315.0" onAction="#deleteUser_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #8FBC8F;" text="delete user" textFill="WHITE">
+            <JFXButton fx:id="deleteUser" buttonType="RAISED" layoutY="315.0" onAction="#deleteUser_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #FA8072;" text="delete user" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -40,7 +40,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="addUser" buttonType="RAISED" layoutY="388.0" onAction="#addUser_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #d22324ba;" text="add user" textFill="WHITE">
+            <JFXButton fx:id="addUser" buttonType="RAISED" layoutY="388.0" onAction="#addUser_action" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #FA8072;" text="edit user's data" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -48,21 +48,29 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <ImageView fitHeight="46.0" fitWidth="32.0" layoutX="43.0" layoutY="319.0">
+            <ImageView fitHeight="46.0" fitWidth="32.0" layoutX="35.0" layoutY="315.0">
                <image>
                   <Image url="@../icons/Delete.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="53.0" fitWidth="58.0" layoutX="34.0" layoutY="241.0">
+            <ImageView fitHeight="53.0" fitWidth="58.0" layoutX="22.0" layoutY="241.0">
                <image>
                   <Image url="@../icons/avatar.png" />
                </image>
             </ImageView>
-            <ImageView layoutX="39.0" layoutY="387.0">
+            <ImageView fitHeight="40.0" fitWidth="48.0" layoutX="27.0" layoutY="391.0">
                <image>
-                  <Image url="@../icons/check.png" />
+                  <Image url="@../icons/edit-property-xxl.png" />
                </image>
             </ImageView>
+            <JFXButton fx:id="back" buttonType="RAISED" layoutY="467.0" onAction="#back" prefHeight="46.0" prefWidth="256.0" style="-fx-background-color: #FA8072;" text="Back" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="251.0" layoutY="68.0" prefHeight="84.0" prefWidth="650.0" style="-fx-background-color: #7e7e7e;">
@@ -80,6 +88,11 @@
             <JFXCheckBox fx:id="checkId" layoutX="519.0" layoutY="7.0" onAction="#checkId_action" selected="true" text="Par Id" textFill="WHITE" unCheckedColor="WHITE" />
             <JFXCheckBox fx:id="checkName" layoutX="519.0" layoutY="31.0" onAction="#checkName_action" text="Par Username" textFill="WHITE" unCheckedColor="WHITE" />
             <Text fx:id="msgerr" fill="RED" layoutX="141.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez une option de recherche*" visible="false" />
+            <ImageView layoutX="84.0" layoutY="24.0">
+               <image>
+                  <Image url="@../icons/Search%20Property_32px.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <Text layoutX="284.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espace administrateur">
@@ -92,12 +105,12 @@
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <TableView fx:id="table" layoutX="259.0" layoutY="159.0" prefHeight="341.0" prefWidth="633.0">
+      <TableView fx:id="table" layoutX="259.0" layoutY="159.0" prefHeight="341.0" prefWidth="641.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="104.0" text="Id" />
             <TableColumn fx:id="username" text="Username" />
             <TableColumn fx:id="email" prefWidth="134.0" text="Email" />
-            <TableColumn fx:id="enabled" minWidth="0.0" prefWidth="162.0" text="Enabled" />
+            <TableColumn fx:id="enabled" prefWidth="152.0" text="Enabled" />
             <TableColumn fx:id="role" prefWidth="152.0" text="Role" />
          </columns>
       </TableView>

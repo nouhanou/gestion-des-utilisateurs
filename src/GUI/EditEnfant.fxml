@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="644.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EditEnfantController">
+   <children>
+      <AnchorPane layoutX="63.0" layoutY="98.0" prefHeight="519.0" prefWidth="829.0" style="-fx-background-color: #808080; -fx-background-radius: 10px;">
+         <children>
+            <JFXTextField fx:id="name" layoutX="112.0" layoutY="102.0" promptText="Nom et prenom" />
+            <JFXDatePicker fx:id="datenaissance" layoutX="116.0" layoutY="184.0" promptText="Date de naissance" />
+            <JFXTextField fx:id="lieux" layoutX="121.0" layoutY="264.0" promptText="Lieux de naissance" />
+            <JFXComboBox fx:id="garderie" layoutX="130.0" layoutY="334.0" prefHeight="25.0" prefWidth="173.0" promptText="garderie" />
+            <JFXComboBox fx:id="classe" layoutX="139.0" layoutY="406.0" prefHeight="25.0" prefWidth="180.0" promptText="Classe" />
+            <JFXTextArea fx:id="info" layoutX="396.0" layoutY="103.0" prefHeight="260.0" prefWidth="367.0" promptText="Autre informations" />
+            <JFXButton fx:id="edit" layoutX="370.0" layoutY="447.0" onAction="#edit" prefHeight="36.0" prefWidth="89.0" text="edit" />
+            <JFXButton fx:id="back" layoutX="533.0" layoutY="453.0" onAction="#back" text="back" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="221.0" layoutY="48.0" prefHeight="17.0" prefWidth="277.0" text="Editer le profil de votre enfant" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Admin_statController">
+   <children>
+      <Text layoutX="284.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enfants">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Text>
+      <Label layoutX="367.0" layoutY="41.0" text="Statistique">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <PieChart fx:id="Pi" layoutX="93.0" layoutY="45.0" prefHeight="422.0" prefWidth="777.0" />
+      <JFXButton fx:id="stat" buttonType="RAISED" layoutX="739.0" layoutY="79.0" onAction="#StatDetail_action" text="Voir detail" textFill="#379000">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="back" buttonType="RAISED" layoutX="133.0" layoutY="442.0" onAction="#back" prefHeight="25.0" prefWidth="66.0" text="back" textFill="#379000">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -30,6 +30,7 @@ import com.restfb.FacebookClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
@@ -50,17 +51,19 @@ public class LoginController implements Initializable {
     @FXML
     private Text msgerreur;
     @FXML
-    private Text nullErr;
-    @FXML
     private JFXButton cnx;
-    @FXML
-    private JFXButton auth;
     @FXML
     private JFXTextField username_field;
     @FXML
     private JFXPasswordField password_field;
     @FXML
+    private Text nullErr;
+    @FXML
+    private JFXButton auth;
+    @FXML
     private JFXButton signin;
+    @FXML
+    private JFXButton mdp;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,22 +78,30 @@ public class LoginController implements Initializable {
         System.out.println("password_field: " + password_field.getText());
 
         if (username_field.getText().equals("") || password_field.getText().equals("")) {
-            nullErr.setVisible(true);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("Ooops, Champs vides!");
+
+                alert.showAndWait();
             error = true;
-        } else {
-            nullErr.setVisible(false);
-        }
+        } 
 
         if (!error) {
             int x = 0;
             UService = new UserService();
             if (UService.login(username_field.getText(), password_field.getText())) {
-                Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
 
                 cnx.getScene().setRoot(root);
 
             } else {
-                msgerreur.setVisible(true);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("Ooops, invalid credentials!");
+
+                alert.showAndWait();
             }
         }
     }
@@ -109,7 +120,7 @@ public class LoginController implements Initializable {
     @FXML
     private void authUser(ActionEvent event) throws IOException, SQLException {
         String domaine = "https://kawami.io";
-        String appId = "353823941796971";
+        String appId = "2519110964972355";
 
         String autUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domaine + "&scope=email,public_profile";
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -134,7 +145,7 @@ public class LoginController implements Initializable {
                 if (user.getId().length() != 0) {
                     UService = new UserService();
                     if (UService.loginByfb(user.getName(), user.getId())) {
-                        Parent root = FXMLLoader.load(getClass().getResource("Users.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
                         cnx.getScene().setRoot(root);
                     } else {
                         msgerreur.setVisible(true);
@@ -145,4 +156,13 @@ public class LoginController implements Initializable {
         }
 
     }
+
+    @FXML
+    private void mdp(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("forget.fxml"));
+
+                mdp.getScene().setRoot(root);
+    }
+
+    
 }

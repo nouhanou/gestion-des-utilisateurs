@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="644.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminKidController">
+   <children>
+      <Label layoutX="57.0" layoutY="118.0" prefHeight="17.0" prefWidth="96.0" text="Date de naissance:" />
+      <Label layoutX="62.0" layoutY="163.0" text="Lieux de naissance" />
+      <Label layoutX="72.0" layoutY="209.0" prefHeight="17.0" prefWidth="105.0" text="Garderie:" />
+      <Label layoutX="77.0" layoutY="254.0" prefHeight="17.0" prefWidth="127.0" text="Classe:" />
+      <Label layoutX="499.0" layoutY="138.0" text="Autres info:" />
+      <JFXListView fx:id="comments" layoutX="42.0" layoutY="368.0" prefHeight="133.0" prefWidth="746.0" />
+      <JFXTextArea fx:id="tText" layoutX="96.0" layoutY="537.0" prefHeight="35.0" prefWidth="464.0" />
+      <JFXButton fx:id="send" layoutX="634.0" layoutY="558.0" onAction="#send" text="ajouter" />
+      <JFXButton fx:id="back" layoutX="115.0" layoutY="600.0" onAction="#back" text="back" />
+      <Label fx:id="lname" layoutX="229.0" layoutY="31.0" prefHeight="35.0" prefWidth="214.0" />
+      <Label fx:id="linfo" layoutX="626.0" layoutY="139.0" prefHeight="17.0" prefWidth="203.0" />
+      <Label fx:id="lclasse" layoutX="202.0" layoutY="253.0" prefHeight="17.0" prefWidth="159.0" />
+      <Label fx:id="lgarderie" layoutX="207.0" layoutY="208.0" prefHeight="17.0" prefWidth="124.0" />
+      <Label fx:id="lplace" layoutX="228.0" layoutY="164.0" prefHeight="17.0" prefWidth="115.0" />
+      <Label fx:id="ldate" layoutX="222.0" layoutY="115.0" prefHeight="17.0" prefWidth="108.0" />
+      <JFXButton fx:id="banir" layoutX="190.0" layoutY="600.0" onAction="#banir" text="Banir L'utilisateur" />
+   </children>
+</AnchorPane>

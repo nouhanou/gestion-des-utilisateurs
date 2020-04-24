@@ -37,10 +37,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  * FXML Controller class
@@ -73,7 +75,16 @@ public class AdminController implements Initializable {
     private TableColumn<User, Integer> enabled;
     @FXML
     private TableColumn<User, String> role;
+    
     static int id_ads;
+    @FXML
+    private AnchorPane child;
+    @FXML
+    private JFXButton deleteUser;
+    @FXML
+    private JFXButton addUser;
+    @FXML
+    private JFXButton back;
 
     /**
      * Initializes the controller class.
@@ -90,6 +101,7 @@ public class AdminController implements Initializable {
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         enabled.setCellValueFactory(new PropertyValueFactory<>("enabled"));
         role.setCellValueFactory(new PropertyValueFactory<>("role"));
+
         //created_at.setCellValueFactory(new PropertyValueFactory<>("created_at"));
         // TODO
 
@@ -106,6 +118,7 @@ public class AdminController implements Initializable {
                     email.setCellValueFactory(new PropertyValueFactory<>("email"));
                     enabled.setCellValueFactory(new PropertyValueFactory<>("enabled"));
                     role.setCellValueFactory(new PropertyValueFactory<>("role"));
+
                     //created_at.setCellValueFactory(new PropertyValueFactory<>("created_at"));
 
                 } else {
@@ -117,6 +130,7 @@ public class AdminController implements Initializable {
                         email.setCellValueFactory(new PropertyValueFactory<>("email"));
                         enabled.setCellValueFactory(new PropertyValueFactory<>("enabled"));
                         role.setCellValueFactory(new PropertyValueFactory<>("role"));
+
                         //created_at.setCellValueFactory(new PropertyValueFactory<>("created_at"));
 
                     } else if (checkName.isSelected()) {
@@ -127,6 +141,7 @@ public class AdminController implements Initializable {
                         email.setCellValueFactory(new PropertyValueFactory<>("email"));
                         enabled.setCellValueFactory(new PropertyValueFactory<>("enabled"));
                         role.setCellValueFactory(new PropertyValueFactory<>("role"));
+
                         //created_at.setCellValueFactory(new PropertyValueFactory<>("created_at"));
                     }
                 }
@@ -153,6 +168,12 @@ public class AdminController implements Initializable {
 
     @FXML
     private void deleteUser_action(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText("Look, an Error Dialog");
+        alert.setContentText("selectionner un utilisateur de la table");
+
+        alert.showAndWait();
         int id = table.getSelectionModel().getSelectedItem().getId();
         System.out.println(id);
         id_ads = id;
@@ -160,7 +181,7 @@ public class AdminController implements Initializable {
         Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
         alert1.setTitle("confirmation");
         alert1.setHeaderText(null);
-        alert1.setContentText("voulez vous supprimer cette demande");
+        alert1.setContentText("voulez vous supprimer cet utilisateur");
         alert1.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 int idS = table.getSelectionModel().getSelectedItem().getId();
@@ -184,6 +205,12 @@ public class AdminController implements Initializable {
 
     @FXML
     private void addUser_action(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText("Look, an Error Dialog");
+        alert.setContentText("selectionner un utilisateur de la table");
+
+        alert.showAndWait();
 
         int id = table.getSelectionModel().getSelectedItem().getId();
         System.out.println(id);
@@ -204,5 +231,13 @@ public class AdminController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("AdminAcc.fxml"));
+            back.getScene().setRoot(root);
+        
+        
     }
 }

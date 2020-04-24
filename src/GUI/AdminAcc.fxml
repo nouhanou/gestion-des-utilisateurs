@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="644.0" prefWidth="940.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="GUI.AdminAccController">
+   <children>
+      <JFXButton fx:id="parent" layoutX="58.0" layoutY="93.0" onAction="#parent" prefHeight="61.0" prefWidth="220.0" style="-fx-background-color: #FA8072;" text="Gérer les comptes des parents" textFill="WHITE" />
+      <JFXButton fx:id="enfant" layoutX="470.0" layoutY="93.0" onAction="#enfant" prefHeight="61.0" prefWidth="232.0" style="-fx-background-color: #FA8072;" text="Consulter le profil de vos enfants" textFill="WHITE" />
+      <JFXButton fx:id="back" layoutX="94.0" layoutY="373.0" onAction="#back" prefHeight="52.0" prefWidth="111.0" style="-fx-background-color: #808080;" text="Back" textFill="WHITE" />
+   </children>
+</AnchorPane>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SigninController">
+<StackPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DashboardController">
    <children>
       <StackPane>
          <children>
@@ -19,17 +20,99 @@
                   <String fx:value="login-bg" />
                </styleClass>
                <children>
-                  <AnchorPane layoutX="45.0" layoutY="174.0" prefHeight="433.0" prefWidth="843.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10px;">
+                  <AnchorPane layoutX="45.0" layoutY="174.0" prefHeight="433.0" prefWidth="843.0" style="-fx-background-color: #808080; -fx-background-radius: 10px;">
                      <effect>
                         <DropShadow color="#20beb4" height="35.59" radius="13.6475" />
                      </effect>
+                     <children>
+                        <JFXButton fx:id="para" alignment="BOTTOM_CENTER" layoutX="69.0" layoutY="59.0" onAction="#ParametreAction" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Comptes" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_CENTER" layoutX="69.0" layoutY="253.0" onAction="#evenementAction" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Evénement" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_CENTER" layoutX="255.0" layoutY="253.0" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Restauration" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_CENTER" layoutX="255.0" layoutY="59.0" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Clubs" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_CENTER" layoutX="475.0" layoutY="59.0" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Etudes" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_CENTER" layoutX="475.0" layoutY="253.0" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Bibliothèque" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fitHeight="55.0" fitWidth="50.0" layoutX="290.0" layoutY="71.0">
+                           <image>
+                              <Image url="@../icons/clubs-xxl.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="46.0" fitWidth="64.0" layoutX="283.0" layoutY="275.0">
+                           <image>
+                              <Image url="@../icons/restaurant-xxl.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="78.0" fitWidth="80.0" layoutX="495.0" layoutY="259.0">
+                           <image>
+                              <Image url="@../icons/books-xxl.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="62.0" fitWidth="80.0" layoutX="79.0" layoutY="264.0">
+                           <image>
+                              <Image url="@../icons/calendar-xxl.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="62.0" fitWidth="80.0" layoutX="89.0" layoutY="71.0">
+                           <image>
+                              <Image url="@../icons/settings-12-xxl.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton fx:id="pass" alignment="BOTTOM_CENTER" layoutX="667.0" layoutY="59.0" onAction="#pass" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Changer mot de passe" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fitHeight="62.0" fitWidth="80.0" layoutX="689.0" layoutY="74.0">
+                           <image>
+                              <Image url="@../icons/key-4-xxl.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="70.0" fitWidth="80.0" layoutX="495.0" layoutY="68.0">
+                           <image>
+                              <Image url="@../icons/school-xxl.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton fx:id="stat" alignment="BOTTOM_CENTER" layoutX="664.0" layoutY="253.0" onAction="#stat" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Statistiques" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fitHeight="62.0" fitWidth="73.0" layoutX="688.0" layoutY="265.0">
+                           <image>
+                              <Image url="@../icons/statistics-xxl.png" />
+                           </image>
+                        </ImageView>
+                     </children>
                   </AnchorPane>
-                  <ImageView fitHeight="151.0" fitWidth="180.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="151.0" fitWidth="182.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../GUI/logo.png" />
+                        <Image url="@../icons/logo.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="378.0" layoutY="48.0" text="Bienvenu a kidzy" textFill="YELLOW">
+                  <Label alignment="CENTER" layoutX="314.0" layoutY="20.0" prefHeight="107.0" prefWidth="329.0" text="Bienvenu a kidzy" textFill="DEEPSKYBLUE">
                      <font>
                         <Font size="36.0" />
                      </font>
