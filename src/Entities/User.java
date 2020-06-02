@@ -7,10 +7,13 @@ package Entities;
 import java.sql.Date;
 
 
+
+
 /**
  *
  * @author HP
  */
+
 public class User {
     int id;
     String username;
@@ -63,6 +66,12 @@ public class User {
     
     public User(int id) {
         this.id = id;
+    }
+
+    public User(String username, int enabled, String role) {
+        this.username = username;
+        this.enabled = enabled;
+        this.role = role;
     }
     
     public User(String username, String email, int enabled, String role) {
@@ -118,6 +127,14 @@ public class User {
 
     public void setLast_login(Date last_login) {
         this.last_login = last_login;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        User.user = user;
     }
 
     public String getRole() {

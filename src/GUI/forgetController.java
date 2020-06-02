@@ -64,7 +64,7 @@ public class forgetController implements Initializable {
                     
                 
                     
-                   // ser.sendEmail(String.valueOf(User.code),"Password",email.getText());
+                   //ser.sendEmail(String.valueOf(User.code),"Password",email.getText());
                     //EmailService.sendMail(email.getText(),"Password",String.valueOf(User.code));
                     
                     

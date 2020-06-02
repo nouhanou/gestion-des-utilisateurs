@@ -25,7 +25,7 @@
                         <DropShadow color="#20beb4" height="35.59" radius="13.6475" />
                      </effect>
                      <children>
-                        <JFXButton fx:id="para" alignment="BOTTOM_CENTER" layoutX="69.0" layoutY="59.0" onAction="#ParametreAction" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" text="Comptes" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                        <JFXButton id=" #FA8072" fx:id="para" alignment="BOTTOM_CENTER" layoutX="69.0" layoutY="59.0" onAction="#ParametreAction" prefHeight="107.0" prefWidth="120.0" style="-fx-background-color: #FA8072;" styleClass="#cd2122" text="Comptes" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -117,6 +117,16 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
+                  <JFXButton fx:id="logout" layoutX="738.0" layoutY="31.0" onAction="#logout" prefHeight="46.0" prefWidth="177.0" style="-fx-background-color: #FA8072;" text="Dexonnexion" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="39.0" fitWidth="50.0" layoutX="863.0" layoutY="36.0">
+                     <image>
+                        <Image url="@../icons/logout-xxl.png" />
+                     </image>
+                  </ImageView>
                </children>
                <effect>
                   <DropShadow />

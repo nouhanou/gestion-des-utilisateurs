@@ -28,6 +28,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -74,7 +75,7 @@ public class UserService {
     }
 
     public Boolean Signin(String username, String email, String pwd) throws SQLException {
-        String req = "INSERT INTO `fos_user` (`username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `password`, `roles`) VALUES (?,?,?,?,?,?,?)";
+        String req = "INSERT INTO `fos_user` (`username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `password`, `roles`, `idFb`, `isFb`) VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement;
 
         try {
@@ -85,8 +86,13 @@ public class UserService {
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, email.toLowerCase());
             preparedStatement.setInt(5, 1);
-            preparedStatement.setString(6, pwd);
+            preparedStatement.setString(6, BCrypt.hashpw(pwd, BCrypt.gensalt(13)));
+            //preparedStatement.setString(6, pwd);
             preparedStatement.setString(7, "a:0:{}");
+            preparedStatement.setString(8, "null");
+            preparedStatement.setString(9, "0");
+
+
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
@@ -105,14 +111,14 @@ public class UserService {
   
 
     public Boolean login(String userName, String Pwd) throws SQLException {
-        String req = "SELECT * FROM fos_user WHERE username=? and password= ? and  enabled=1";
+        String req = "SELECT * FROM fos_user WHERE username=? and  enabled=1";
         PreparedStatement pre = cnx.prepareStatement(req);
         pre.setString(1, userName);
-        pre.setString(2, Pwd);
+        //pre.setString(2, BCrypt.hashpw(Pwd, BCrypt.gensalt(10)));
         ResultSet rs = pre.executeQuery();
         while (rs.next()) {
-            /* if (BCrypt.checkpw(Pwd, rs.getString("password"))) {
-             */
+             if (BCrypt.checkpw(Pwd, rs.getString("password"))) {
+             
 
             System.out.println(rs.getString("password"));
             Session.setId(rs.getInt("id"));
@@ -123,6 +129,26 @@ public class UserService {
 
 
             return true;
+
+        }
+        }
+
+        return false;
+    }
+    
+    public Boolean bannir(String userName, String Pwd) throws SQLException {
+        String req = "SELECT * FROM fos_user WHERE username=? and  enabled=0";
+        PreparedStatement pre = cnx.prepareStatement(req);
+        pre.setString(1, userName);
+        //pre.setString(2, Pwd);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            if (BCrypt.checkpw(Pwd, rs.getString("password")))
+            
+
+            {
+            return true;
+            }
 
         }
 
@@ -151,7 +177,7 @@ public class UserService {
     
     public Boolean SigninByfb(String username, String userid) throws SQLException {
         if (!Exist(username, userid)) {
-            String req = "INSERT INTO `fos_user` (`username`, `username_canonical`, `isFb`, `idFb`, `enabled`, `roles`) VALUES (?,?,?,?,?,?)";
+            String req = "INSERT INTO `fos_user` (`username`, `username_canonical`, `isFb`, `idFb`, `enabled`, `roles`, `email`, `email_canonical`, `password`) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement;
 
             try {
@@ -163,6 +189,10 @@ public class UserService {
                 preparedStatement.setString(4, userid);
                 preparedStatement.setInt(5, 1);
                 preparedStatement.setString(6, "a:0:{}");
+                preparedStatement.setString(7, "null");
+                preparedStatement.setString(8, "null");
+                preparedStatement.setString(9, "null");
+            
                 preparedStatement.execute();
                 ResultSet rs = preparedStatement.getGeneratedKeys();
                 if (rs.next()) {
@@ -246,17 +276,28 @@ public class UserService {
         }
     }
     
-      public void update(int id,User u) {
-        String req = "UPDATE `fos_user` SET username = ? , email = ? , enabled = ? , role = ? WHERE id = ?";
+      public void update(User u) {
+        String req = "UPDATE `fos_user` SET username = ? ,email = ? ,enabled = ? ,roles = ? WHERE id = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getEmail());
+            //ps.setString(3, u.getPassword());
             ps.setInt(3, u.getEnabled());
-            ps.setString(4, u.getRole());
+            if(u.getRole().equals("Parent"))
+                ps.setString(4,"a:0:{}");
+            //ps.setString(4, u.getRole());
+            else if(u.getRole().equals("Admin"))
+                ps.setString(4,"a:1:{i:0;s:10:\"ROLE_ADMIN\";}");
+            //ps.setString(5, u.getPassword());
+            //ps.setString(6, u.getEmail());
+            //ps.setString(7, u.getUsername());
+            //ps.setString(5, u.getRole());
+            
             ps.setInt(5, u.getId());
 // execute insert SQL statement
             ps.executeUpdate();
+             //cnx.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -264,6 +305,7 @@ public class UserService {
       
      
     public List<User> admin_selectAll() {
+        String r="";
         String req = "SELECT * FROM `fos_user` ";
         PreparedStatement preparedStatement;
         List<User> Ads = new ArrayList<User>();
@@ -271,7 +313,12 @@ public class UserService {
             Statement statement = cnx.createStatement();
             ResultSet resultSet = statement.executeQuery(req);
             while (resultSet.next()) {
-                User LO = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(4), resultSet.getInt(6), resultSet.getString(12));
+                if ("a:1:{i:0;s:10:\"ROLE_ADMIN\";}".equals(resultSet.getString(12)))
+                    r="Admin";
+                else if ("a:0:{}".equals(resultSet.getString(12)))
+                    r="Parent";
+                
+                User LO = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(4), resultSet.getInt(6), r);
                 Ads.add(LO);
 
             }

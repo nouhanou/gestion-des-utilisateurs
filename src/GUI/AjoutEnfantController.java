@@ -24,6 +24,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.sql.Date;
 import java.util.Properties;
+import static java.util.logging.Level.SEVERE;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -78,15 +80,28 @@ public class AjoutEnfantController implements Initializable {
         Session s = new Session();
 
         Date d = Date.valueOf(datenaissance.getValue());
-        java.sql.Date dnow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        if (classe.getSelectionModel().getSelectedItem().equals("classe préscolaire") && dnow.getYear() - d.getYear() != 5) {
-            showMessageDialog(null, "pour inscrire votre enfant en classe preparatoire il doit etre agé 5 ans");
-        } else if (classe.getSelectionModel().getSelectedItem().equals("classe maternelle") && dnow.getYear() - d.getYear() != 4) {
-            showMessageDialog(null, "pour inscrire votre enfant en classe maternelle il doit etre agé  4 ans");
-        } else if ((classe.getSelectionModel().getSelectedItem().equals("garderie") && dnow.getYear() - d.getYear() != 2)) {
-            showMessageDialog(null, "pour inscrire votre enfant en garderie il doit etre agé entre 2 et 3 ans");
        
-        } else {
+        java.sql.Date dnow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        long diff = dnow.getYear() - d.getYear();
+        //Boolean error = false;
+        if (name.getText().equals("")
+                || lieux.getText().equals("")
+                || garderie.getSelectionModel().getSelectedItem().equals("")
+                || classe.getSelectionModel().getSelectedItem().equals("")
+                //|| datenaissance.getValue().equals(null)
+                ) {
+                        showMessageDialog(null, "champs vides");
+
+            
+        }
+
+        else if (classe.getSelectionModel().getSelectedItem().equals("classe préscolaire") && diff != 5) {
+            showMessageDialog(null, "l'age de votre enfant est " + diff + " ans ,pour inscrire votre enfant en classe preparatoire il doit etre agé 5 ans");
+        } else if (classe.getSelectionModel().getSelectedItem().equals("classe maternelle") && diff != 4) {
+            showMessageDialog(null, "l'age de votre enfant est " + diff + " ans,pour inscrire votre enfant en classe maternelle il doit etre agé  4 ans");
+        } else if (classe.getSelectionModel().getSelectedItem().equals("garderie") && diff != 3 && diff != 2) {
+            showMessageDialog(null, "l'age de votre enfant est " + diff + " ans,pour inscrire votre enfant en garderie il doit etre agé entre 2 et 3 ans");
+        }  else {
             EnfantService Eservices = new EnfantService();
             Enfant e = new Enfant(name.getText(), d, lieux.getText(), garderie.getSelectionModel().getSelectedItem(), classe.getSelectionModel().getSelectedItem(), info.getText(), s.getId());
             Eservices.insert(e);
@@ -94,9 +109,7 @@ public class AjoutEnfantController implements Initializable {
             //add.getScene().setRoot(root);
 
             //send Mail
-           mailling("nouha.benfarhat@esprit.tn");
-             
-            
+            mailling("nouha.benfarhat@esprit.tn");
             showMessageDialog(null, "Votre enfant est bien inscrit");
             ((Node) event.getSource()).getScene().getWindow().hide();
             Parent parent = FXMLLoader.load(getClass().getResource("ListeEnfant.fxml"));
@@ -107,44 +120,58 @@ public class AjoutEnfantController implements Initializable {
         }
 
     }
- 
- public void mailling(String adr) {
 
-        //authentication info
-        final String username = "nouha.noreply@gmail.com";
-        final String password = "PIDEV2020";
-        String fromEmail = "test.nom2020@gmail.com";
+    public static void mailling(String recipient) throws MessagingException {
 
+       
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
+        
+         //authentication info
+         String username = "nouha.noreply@gmail.com";
+         String password = "PIDEV2020";
+        //String fromEmail = "test.nom2020@gmail.com";
 
-        javax.mail.Session session =  javax.mail.Session.getInstance(properties,new Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username,password);
+        javax.mail.Session session = javax.mail.Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
             }
 
-});
+        });
         //Start our mail message
-        MimeMessage msg = new MimeMessage(session);
+        Message message = prepareMessage(session, username, recipient);
+        Transport.send(message);
+        System.out.println("email sent successfuly");
+        
+    }   
+        private static Message prepareMessage(javax.mail.Session session,String username,String recipient)
+        {
         try {
-            msg.setFrom(new InternetAddress(fromEmail));
-                                msg.addRecipient(Message.RecipientType.TO, new InternetAddress(adr)); 
-            msg.setSubject("Commande");
-            msg.setText("Votre Commande est Passé avec Succées !");
-             
-            Transport.send(msg);//fama 7aja lezm t'activiha fel adressemail mte3ek less secure c  
+            MimeMessage msg = new MimeMessage(session);
+
+            msg.setFrom(new InternetAddress(username));
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            msg.setSubject("inscription");
+            msg.setText("Votre enfant est bien inscrit !");
+            return msg;
+
+            //Transport.send(msg);
+
+        } catch (MessagingException ex) {
             
-        }catch (MessagingException e) {
-            e.printStackTrace();
+            
         }
         // TODO Auto-generated catch block
+        return null;
 
     }
+
+
     @FXML
     private void back(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Parent.fxml"));

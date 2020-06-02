@@ -32,6 +32,8 @@ public class DashboardController implements Initializable {
     private JFXButton pass;
     @FXML
     private JFXButton stat;
+    @FXML
+    private JFXButton logout;
    
 
     
@@ -76,6 +78,12 @@ public class DashboardController implements Initializable {
     private void stat(ActionEvent event) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("Admin_stat.fxml"));
             pass.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            logout.getScene().setRoot(root);
     }
 
     

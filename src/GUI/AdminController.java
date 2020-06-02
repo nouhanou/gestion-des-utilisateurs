@@ -13,13 +13,11 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import static javafx.collections.FXCollections.observableList;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -30,12 +28,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -50,6 +47,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author HP
  */
 public class AdminController implements Initializable {
+    public static  User staticUser;
 
     public ObservableList<User> newobservableList;
     @FXML
@@ -91,6 +89,8 @@ public class AdminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        staticUser = new User();
+        
         UserService Uservice = new UserService();
         ArrayList arrayList;
         arrayList = (ArrayList) Uservice.admin_selectAll();
@@ -101,6 +101,15 @@ public class AdminController implements Initializable {
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         enabled.setCellValueFactory(new PropertyValueFactory<>("enabled"));
         role.setCellValueFactory(new PropertyValueFactory<>("role"));
+        
+        table.setOnMouseClicked((MouseEvent event) -> {
+                if (event.getButton().equals(MouseButton.PRIMARY)) {
+                    staticUser = table.getSelectionModel().getSelectedItem();
+                    
+                }
+            });
+         
+        
 
         //created_at.setCellValueFactory(new PropertyValueFactory<>("created_at"));
         // TODO
@@ -168,12 +177,10 @@ public class AdminController implements Initializable {
 
     @FXML
     private void deleteUser_action(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Dialog");
-        alert.setHeaderText("Look, an Error Dialog");
-        alert.setContentText("selectionner un utilisateur de la table");
-
-        alert.showAndWait();
+       if (staticUser.getId() == 0) {
+            showMessageDialog(null, "Vous devez choisir le profil que vous voulez supprimer");
+        }
+       else{
         int id = table.getSelectionModel().getSelectedItem().getId();
         System.out.println(id);
         id_ads = id;
@@ -202,34 +209,32 @@ public class AdminController implements Initializable {
         });
 
     }
+    }
 
     @FXML
     private void addUser_action(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Dialog");
-        alert.setHeaderText("Look, an Error Dialog");
-        alert.setContentText("selectionner un utilisateur de la table");
+         if (staticUser.getId()== 0) {
+            showMessageDialog(null, "Vous devez choisir l'utilisateur que vous voulez modifier");
+        } else {
 
-        alert.showAndWait();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+            FXMLLoader loader;
+            loader = new FXMLLoader(getClass().getResource("updateUser.fxml"));
+            updateUserController controller = loader.getController();
 
-        int id = table.getSelectionModel().getSelectedItem().getId();
-        System.out.println(id);
-        id_ads = id;
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-        FXMLLoader loader;
-        loader = new FXMLLoader(getClass().getResource("updateUser.fxml"));
-        updateUserController controller = loader.getController();
+            System.out.println("TEST : " + table.getSelectionModel().getSelectedItem());
 
-        System.out.println("TEST : " + table.getSelectionModel().getSelectedItem());
-
-        Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.DECORATED);
-        stage.initOwner(table.getScene().getWindow());
-        stage.setScene(scene);
-        stage.show();
+            Parent root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.initOwner(table.getScene().getWindow());
+            stage.setScene(scene);
+            stage.show();
+        }
+        //loader = new FXMLLoader(getClass().getResource("updateUser.fxml"));
+        
 
     }
 

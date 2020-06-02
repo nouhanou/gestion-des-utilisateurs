@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * FXML Controller class
@@ -52,11 +53,11 @@ public class ChangePwdController implements Initializable {
         Session session = new Session();
         String password = session.getPassword();
                 int id = session.getId();
-        if ((old.getText().equals(password)) && (newp.getText().equals(repeatNew.getText()))) {
+        if ((BCrypt.checkpw(old.getText(), password)) && (newp.getText().equals(repeatNew.getText()))) {
             try {
                 System.out.println(id);
 
-                ser.updatePassword(newp.getText(), id);
+                ser.updatePassword(BCrypt.hashpw(newp.getText(), BCrypt.gensalt(13)), id);
                 Alert info = new Alert(Alert.AlertType.INFORMATION);
             info.setTitle("Password changed");
             info.setContentText("votre mot de passe a été changé avec succées");

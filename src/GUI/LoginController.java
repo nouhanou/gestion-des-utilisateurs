@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Entities.User;
+//import Entities.User;
 import Entities.Session;
 import Services.UserService;
 import com.jfoenix.controls.JFXButton;
@@ -26,6 +26,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.types.User;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,13 +80,23 @@ public class LoginController implements Initializable {
 
         if (username_field.getText().equals("") || password_field.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Look, an Error Dialog");
+            alert.setContentText("Ooops, Champs vides!");
+
+            alert.showAndWait();
+            error = true;
+        }
+        UService = new UserService();
+        if (UService.bannir(username_field.getText(), password_field.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Look, an Error Dialog");
-                alert.setContentText("Ooops, Champs vides!");
+                alert.setContentText("Vous etes banni");
 
                 alert.showAndWait();
-            error = true;
-        } 
+                error= true;
+        }
 
         if (!error) {
             int x = 0;
@@ -119,34 +130,36 @@ public class LoginController implements Initializable {
 
     @FXML
     private void authUser(ActionEvent event) throws IOException, SQLException {
-        String domaine = "https://kawami.io";
-        String appId = "2519110964972355";
+        String domaine = "https://nouhanoreply.wixsite.com/website";
+        String appId = "569917590593517";
 
         String autUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domaine + "&scope=email,public_profile";
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-      
+
         driver.get(autUrl);
         String accessToken;
         while (true) {
 
             if (!driver.getCurrentUrl().contains("facebook.com")) {
                 String url = driver.getCurrentUrl();
+               
                 accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
+                accessToken = accessToken.substring(0,accessToken.indexOf("&"));
 
-                driver.quit();
+
                 driver.quit();
                 driver.quit();
                 driver.quit();
 
                 FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-                com.restfb.types.User user = fbClient.fetchObject("me", com.restfb.types.User.class);
+                User user = fbClient.fetchObject("me", User.class);
 
                 if (user.getId().length() != 0) {
                     UService = new UserService();
                     if (UService.loginByfb(user.getName(), user.getId())) {
                         Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-                        cnx.getScene().setRoot(root);
+                        auth.getScene().setRoot(root);
                     } else {
                         msgerreur.setVisible(true);
                     }
@@ -161,8 +174,7 @@ public class LoginController implements Initializable {
     private void mdp(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("forget.fxml"));
 
-                mdp.getScene().setRoot(root);
+        mdp.getScene().setRoot(root);
     }
 
-    
 }

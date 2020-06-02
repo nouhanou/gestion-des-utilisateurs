@@ -113,7 +113,7 @@ public class ListeEnfantController implements Initializable {
     @FXML
     private void delete_Action(ActionEvent event) throws IOException, SQLException {
         if (staticEnfant.getId() == 0) {
-            showMessageDialog(null, "Please choose the event that you want to delete");
+            showMessageDialog(null, "Vous devez choisir le profil que vous voulez supprimer");
         } else {
             showMessageDialog(null, "Success");
             EnfantService services = new EnfantService();
@@ -132,7 +132,7 @@ public class ListeEnfantController implements Initializable {
     @FXML
     private void edit_action(ActionEvent event) throws IOException {
         if (staticEnfant.getId() == 0) {
-            showMessageDialog(null, "Please choose the account that you want to update");
+            showMessageDialog(null, "Vous devez choisir le profil que vous voulez modifier");
         } else {
 
             /**
@@ -183,7 +183,7 @@ public class ListeEnfantController implements Initializable {
         
         
          if(staticEnfant.getId()==0){
-           showMessageDialog(null, "Please choose the account that you want to show"); 
+           showMessageDialog(null, "Vous devez choisir le profil que vous voulez consulter"); 
         }else{
             ((Node) event.getSource()).getScene().getWindow().hide(); 
             Parent parent = FXMLLoader.load(getClass().getResource("ProfilEnfant.fxml"));

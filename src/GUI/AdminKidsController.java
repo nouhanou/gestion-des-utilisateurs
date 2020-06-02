@@ -103,7 +103,7 @@ public class AdminKidsController implements Initializable {
     @FXML
     private void details_action(ActionEvent event) throws IOException {
         if(staticEnfant.getId()==0){
-           showMessageDialog(null, "Please choose the account that you want to show"); 
+           showMessageDialog(null, "Vous devez choisir le profil que vous voulez consulter"); 
         }else{
             ((Node) event.getSource()).getScene().getWindow().hide(); 
             Parent parent = FXMLLoader.load(getClass().getResource("AdminKid.fxml"));
@@ -118,7 +118,7 @@ public class AdminKidsController implements Initializable {
     @FXML
     private void delete_Action(ActionEvent event) throws SQLException, IOException {
         if (staticEnfant.getId() == 0) {
-            showMessageDialog(null, "Please choose the profile that you want to delete");
+            showMessageDialog(null, "Vous devez choisir le profil que vous voulez supprimer");
         } else {
             showMessageDialog(null, "Success");
             EnfantService services = new EnfantService();

@@ -26,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.types.User;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -70,6 +71,8 @@ public class SigninController implements Initializable {
     private JFXTextField cin_field;
     @FXML
     private JFXTextField child_field;
+    @FXML
+    private JFXButton authf;
 
     /**
      * Initializes the controller class.
@@ -195,8 +198,8 @@ public class SigninController implements Initializable {
 
     @FXML
     private void authUser(ActionEvent event) throws IOException, SQLException {
-        String domaine = "https://kawami.io";
-        String appId = "353823941796971";
+        String domaine = "https://nouhanoreply.wixsite.com/website";
+        String appId = "569917590593517";
         String autUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domaine + "&scope=email,public_profile";
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -207,22 +210,29 @@ public class SigninController implements Initializable {
             if (!driver.getCurrentUrl().contains("facebook.com")) {
                 String url = driver.getCurrentUrl();
                 accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
+                accessToken = accessToken.substring(0,accessToken.indexOf("&"));
 
-                driver.quit();
+                
                 driver.quit();
                 driver.quit();
                 driver.quit();
 
                 FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-                com.restfb.types.User user = fbClient.fetchObject("me", com.restfb.types.User.class);
+                User user = fbClient.fetchObject("me", User.class);
 
                 if (user.getId().length() != 0) {
                     UService = new UserService();
                     if (UService.SigninByfb(user.getName(), user.getId())) {
                         Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-                        cnx.getScene().setRoot(root);
+                        authf.getScene().setRoot(root);
                     } else {
-                        existErr.setVisible(true);
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText("Ooops!");
+
+                alert.showAndWait();
+                       
                     }
                 }
             }

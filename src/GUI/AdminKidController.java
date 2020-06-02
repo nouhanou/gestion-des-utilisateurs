@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+
 import Services.EnfantService;
 import Entities.Commentaire;
 import Entities.Enfant;
@@ -24,15 +25,22 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import static javax.swing.JOptionPane.showMessageDialog;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -84,7 +92,7 @@ public class AdminKidController implements Initializable {
 
             EnfantService services = new EnfantService();
             List l = services.getComments(staticEnfant.getId());
-            
+
             l.stream().filter((c) -> (c instanceof Commentaire)).forEachOrdered((c) -> {
                 comment.add(((Commentaire) c));
             });
@@ -122,23 +130,29 @@ public class AdminKidController implements Initializable {
         stage.setScene(sc);
         stage.show();
     }
-    
+
     int valeurID() {
         Commentaire ev = comments.getSelectionModel().getSelectedItem();
 
         return ev.getId();
-        
+
     }
 
     @FXML
     private void banir(ActionEvent event) throws SQLException {
-           EnfantService xs=new EnfantService();
-        Commentaire x =xs.findMycomment(valeurID());
-      
-       UserService user = new UserService();
-         user.banir(x.getId_user());
+        Image img = new Image("/icons/check.png");
+        EnfantService xs = new EnfantService();
+        Commentaire x = xs.findMycomment(valeurID());
 
-
- 
-}
+        UserService user = new UserService();
+        user.banir(x.getId_user());
+        int id=x.getId_user();
+        Notifications notificationBuilder = Notifications.create()
+                .title("utilisateur banni").text("Le parent avec l'id "+ id +" ne peut plus se connecter").graphic(new ImageView(img)).hideAfter(Duration.seconds(5))
+                .position(Pos.TOP_RIGHT).onAction((ActionEvent event1) -> {
+                    System.out.println("notification");
+        });
+        notificationBuilder.darkStyle();
+        notificationBuilder.showConfirm();
+    }
 }
