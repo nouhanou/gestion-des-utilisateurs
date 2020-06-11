@@ -82,16 +82,7 @@
                      </image>
                   </ImageView>
                   <VBox fx:id="pane_main_grid" layoutX="675.0" layoutY="228.0" prefHeight="200.0" prefWidth="185.0" />
-                  <JFXTextField fx:id="child_field" layoutX="678.0" layoutY="188.0" prefHeight="25.0" prefWidth="177.0" text="Child name" />
-                  <Button fx:id="plus" layoutX="872.0" layoutY="184.0" mnemonicParsing="false" onAction="#AddTextField" prefHeight="17.0" prefWidth="16.0" style="-fx-background-color: #3CB371;">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="24.0">
-                           <image>
-                              <Image url="@../icons/add-2-512.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <Button fx:id="plus" layoutX="872.0" layoutY="184.0" mnemonicParsing="false" onAction="#AddTextField" prefHeight="17.0" prefWidth="16.0" style="-fx-background-color: #3CB371;" />
                   <JFXTextField fx:id="cin_field" layoutX="449.0" layoutY="279.0" text="Cin" />
                </children>
                <effect>

@@ -58,8 +58,8 @@ public class EditEnfantController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         garderie.getItems().addAll("temps complet","mi_temps");
-        classe.getItems().addAll("primaire","secondaire");
+         garderie.getItems().addAll("temps partiel", "Plein-temps");
+        classe.getItems().addAll("classe préscolaire","classe maternelle","garderie");
         info.setText(staticEnfant.getInfo());
         lieux.setText(staticEnfant.getPlace());
         name.setText(staticEnfant.getName());

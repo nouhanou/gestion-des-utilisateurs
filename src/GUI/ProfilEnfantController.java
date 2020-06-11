@@ -100,7 +100,7 @@ public class ProfilEnfantController implements Initializable {
         c.setText(tText.getText());
         EnfantService services = new EnfantService();
         services.insertComment(c);
-        showMessageDialog(null, "Success");
+        showMessageDialog(null, "Votre commentaire a été ajouté");
         ((Node) event.getSource()).getScene().getWindow().hide(); 
         Parent parent = FXMLLoader.load(getClass().getResource("ProfilEnfant.fxml"));
         Stage stage = new Stage();

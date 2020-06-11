@@ -132,7 +132,8 @@ public class AdminKidController implements Initializable {
     }
 
     int valeurID() {
-        Commentaire ev = comments.getSelectionModel().getSelectedItem();
+        Commentaire ev = comments.getSelectionModel().getSelectedItem();//return  String sinon
+        //java.lang.String cannot be cast to Entities.Commentaire cet erreur jeni
 
         return ev.getId();
 
@@ -140,6 +141,7 @@ public class AdminKidController implements Initializable {
 
     @FXML
     private void banir(ActionEvent event) throws SQLException {
+     comments.getSelectionModel().getSelectedItem();
         Image img = new Image("/icons/check.png");
         EnfantService xs = new EnfantService();
         Commentaire x = xs.findMycomment(valeurID());

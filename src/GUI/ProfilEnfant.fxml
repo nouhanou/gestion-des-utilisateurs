@@ -21,7 +21,7 @@
       <Label fx:id="lname" layoutX="312.0" layoutY="36.0" prefHeight="17.0" prefWidth="185.0" />
       <JFXListView fx:id="comments" layoutX="32.0" layoutY="358.0" prefHeight="133.0" prefWidth="746.0" />
       <JFXTextArea fx:id="tText" layoutX="86.0" layoutY="527.0" prefHeight="35.0" prefWidth="464.0" />
-      <JFXButton fx:id="send" layoutX="624.0" layoutY="548.0" onAction="#send" text="ajouter" />
-      <JFXButton fx:id="back" layoutX="105.0" layoutY="590.0" onAction="#back" text="back" />
+      <JFXButton fx:id="send" layoutX="624.0" layoutY="548.0" onAction="#send" prefHeight="25.0" prefWidth="77.0" style="-fx-background-color: #FA8072;" text="ajouter" />
+      <JFXButton fx:id="back" layoutX="93.0" layoutY="590.0" onAction="#back" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #808080;" text="back" />
    </children>
 </AnchorPane>

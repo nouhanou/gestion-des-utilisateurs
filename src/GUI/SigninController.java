@@ -133,7 +133,7 @@ public class SigninController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Look, an Error Dialog");
-                alert.setContentText("please enter 8 digits");
+                alert.setContentText("Ooops,Verifier votre cin");
 
                 alert.showAndWait();
                 error = true;
@@ -229,7 +229,7 @@ public class SigninController implements Initializable {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Look, an Error Dialog");
-                alert.setContentText("Ooops!");
+                alert.setContentText("utilisateur existe deja!");
 
                 alert.showAndWait();
                        

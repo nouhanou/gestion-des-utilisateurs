@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="kidzy.jar" size="397658" download="eager" />
+    <jar href="kidzy.jar" size="397759" download="eager" />
     <jar href="lib\activation-1.1.jar" size="62983" download="eager" />
     <jar href="lib\cglib-nodep-3.2.4.jar" size="350926" download="eager" />
     <jar href="lib\commons-codec-1.10.jar" size="284184" download="eager" />

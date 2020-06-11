@@ -134,26 +134,26 @@ public class LoginController implements Initializable {
         String appId = "569917590593517";
 
         String autUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domaine + "&scope=email,public_profile";
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");//system load eli houwa webdriver.chrome.driver w his name chromedriver.exe 
+        WebDriver driver = new ChromeDriver();//
 
-        driver.get(autUrl);
+        driver.get(autUrl);// i use this driver object pour ouvrir authenticate URL
         String accessToken;
         while (true) {
-
+            //we listen if user is on fb mta3mel chay 7ata ylogini
             if (!driver.getCurrentUrl().contains("facebook.com")) {
-                String url = driver.getCurrentUrl();
+                String url = driver.getCurrentUrl();//means it has access token in the url of our website
                
-                accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
+                accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");//fetch the token
                 accessToken = accessToken.substring(0,accessToken.indexOf("&"));
 
 
-                driver.quit();
+                driver.quit();//close users web browser
                 driver.quit();
                 driver.quit();
 
                 FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-                User user = fbClient.fetchObject("me", User.class);
+                User user = fbClient.fetchObject("me", User.class);// we have our user
 
                 if (user.getId().length() != 0) {
                     UService = new UserService();

@@ -110,7 +110,7 @@ public class AjoutEnfantController implements Initializable {
 
             //send Mail
             mailling("nouha.benfarhat@esprit.tn");
-            showMessageDialog(null, "Votre enfant est bien inscrit");
+            showMessageDialog(null, "Votre enfant est bien inscrit,un mail de confirmation a été envoyé a votre boite mail");
             ((Node) event.getSource()).getScene().getWindow().hide();
             Parent parent = FXMLLoader.load(getClass().getResource("ListeEnfant.fxml"));
             Stage stage = new Stage();
@@ -125,18 +125,18 @@ public class AjoutEnfantController implements Initializable {
 
        
 
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
+        Properties properties = new Properties();//is a key value store
+        properties.put("mail.smtp.auth", "true");//defines whether a note indication is nedded for rmail server
+        properties.put("mail.smtp.starttls.enable", "true");//for tls encryption
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         
          //authentication info
-         String username = "nouha.noreply@gmail.com";
+         String username = "nouha.noreply@gmail.com";//eli yab3eth
          String password = "PIDEV2020";
         //String fromEmail = "test.nom2020@gmail.com";
 
-        javax.mail.Session session = javax.mail.Session.getInstance(properties, new Authenticator() {
+        javax.mail.Session session = javax.mail.Session.getInstance(properties, new Authenticator() {//we use session to login
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
@@ -152,7 +152,7 @@ public class AjoutEnfantController implements Initializable {
         private static Message prepareMessage(javax.mail.Session session,String username,String recipient)
         {
         try {
-            MimeMessage msg = new MimeMessage(session);
+            MimeMessage msg = new MimeMessage(session);//instancier mon msg using the session
 
             msg.setFrom(new InternetAddress(username));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
@@ -160,7 +160,6 @@ public class AjoutEnfantController implements Initializable {
             msg.setText("Votre enfant est bien inscrit !");
             return msg;
 
-            //Transport.send(msg);
 
         } catch (MessagingException ex) {
             
